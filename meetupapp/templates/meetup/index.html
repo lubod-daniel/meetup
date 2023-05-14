@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/meetup_logo'%}">
+    
+</head>
+<body >
+    {%if request.user.is_authenticated%}
+    <p> welcome {{request.user.name}}!, we hope we meet your satisfaction today. </p>
+    <a href="{% url 'meetup_create'%}">Create Meetup</a>
+    <a href="{% url 'logout' %}">Logout</a>
+    <p style="text-align: end"><a href="{% url 'user-meetups' request.user.id%}">My Meetups</a></p>
+    {%else%}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'registration' %}">Register</a>
+    {%endif%}
+    <form action="" method="GET">
+        {%csrf_token%}
+        <input type='search' placeholder='search meetup' name='search'/>
+        <button type='submit'>search</button>
+    
+    </form><br>
+    
+
+    <a href="{% url 'homepage' %}">Home</a>
+    <hr>
+
+    <h1>All Meetups</h1><br>
+   <table border=5>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Meetup date</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    
+    {% for meetup in meetups%}
+    <tr>
+        <td>{{meetup.title}}</td>
+        <td>{{meetup.description}}</td>
+        <td>{{meetup.meetup_date}}</td>
+        <td><a href="{% url 'meetup-details' meetup.slug%}" target="_new">View</a></td>
+        <td><a href="{% url 'meetup-update' meetup.id%}">Edit</a></td>
+        <td><a href="{% url 'meetup-delete' meetup.id%}">Delete</a></td>
+    </tr>
+    {%endfor%}
+
+   </table>
+   <p><b>
+    {% if count > 1 %}
+    No of meetups: {{count}}    
+    {%else%}
+    No of meetup: {{count}}
+    {%endif%}
+   </b></p>
+   <p><b>{{count}} {% if count > 1 %} Meetups {%else%} Meetup {%endif%}</b> </p>
+
+
+
+
+
+
+
+</body>
+</html>

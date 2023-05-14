@@ -1,0 +1,153 @@
+{% extends 'meetup/about.html' %}
+{%load static%}
+
+{%block topbar%}
+{%endblock%}
+
+{%block navbar%}
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+    <div class="container-fluid collapse navbar-collapse m-3" id="navbarCollapse">
+        <a class="navbar-brand" href="{% url 'homepage' %}">
+            <img src="{% static 'meetup/images/meet_simple.jpg'%}" alt="Logo" width="40" height="35" class="d-inline-block align-text-top">
+            Meet-up Zone
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </div>
+  </nav>
+{%endblock%}
+
+{%block pageheader%}
+<div class="container-fluid bg-dark bg-img p-5 mb-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-uppercase text-white">LOGIN</h1>
+            <a href="{% url 'homepage' %}">Home</a>
+            <i class="far fa-square text-primary px-2"></i>
+            <a href="{% url 'registration' %}">Sign up</a>
+        </div>
+    </div>
+</div>
+
+<div class="formbg-outer">
+    <div class="formbg">
+        <div class="formbg-inner padding-horizontal--48">
+            <span class="padding-bottom--15">Sign in to your account</span>
+            <form id="stripe-login" action="" method="POST">
+                {%csrf_token%}
+                <div class="field padding-bottom--24">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" placeholder="enter email"/>
+                </div>
+                <div class="field padding-bottom--24">
+                    <div class="grid--50-50">
+                        <label for="password">Password</label>
+                        <div class="reset-pass">
+                            <a href="#" class="text-primary">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <input type="password" name="password" placeholder="enter password"/>
+                </div>
+                <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+                    <label for="checkbox">
+                        <input type="checkbox" name="checkbox"> Stay signed in for a week
+                    </label>
+                </div>
+                <div class="field padding-bottom--24">
+                  <input type="submit" name="submit" value="Continue" class="bg-primary">
+                </div>
+                <div class="field">
+                  <a class="text-primary" href="#"><b>Use single sign-on (Google) instead</b></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block about%}
+{%endblock%}
+
+{%block facts%}
+{%endblock%}
+
+{%block footer%}
+<div class="container-fluid bg-img text-secondary" style="margin-top: 90px">
+    <div class="container">
+        <div class="row justify-content-center">
+           
+            <div class="col-lg-8 col-md-6">
+                <div class="row gx-5">
+                    <div class="col-lg-4 col-md-12 pt-5 mb-5">
+                        <h4 class="text-primary text-uppercase mb-4">Get In Touch</h4>
+                        <div class="d-flex mb-2">
+                            <i class="bi bi-geo-alt text-primary me-2"></i>
+                            <p class="mb-0">News Engineering, Abuja.</p>
+                        </div>
+                        <div class="d-flex mb-2">
+                            <i class="bi bi-envelope-open text-primary me-2"></i>
+                            <p class="mb-0">lubod-daniel@outlooks.com</p>
+                        </div>
+                        <div class="d-flex mb-2">
+                            <i class="bi bi-telephone text-primary me-2"></i>
+                            <p class="mb-0">+234 706 957 2763</p>
+                        </div>
+                        <div class="d-flex mt-4">
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://twitter.com/home" target="_blank"><i class="fab fa-twitter fw-normal"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://web.facebook.com/" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://www.linkedin.com/in/olubode-busayo-aca-in-view-33440717a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BGu4UoZ3dSxqtHCgjebXvnw%3D%3D" target="_blank"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fw-normal"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                        <h4 class="text-primary text-uppercase mb-4">Quick Links</h4>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="{% url 'homepage' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                            <a class="text-secondary mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                            {%if request.user.is_authenticated%}
+                            <a class="text-secondary mb-2" href="{% url 'logout' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Logout</a>
+                            <a class="text-secondary mb-2" href="{% url 'meetup_create'%}"><i class="bi bi-arrow-right text-primary me-2"></i>Create Meet up</a>
+                            <a class="text-secondary mb-2" href="{% url 'user-meetups' request.user.id%}"><i class="bi bi-arrow-right text-primary me-2"></i>My Meet up</a>
+                            {%else%}
+                            <a class="text-secondary mb-2" href="{% url 'login' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Login</a>
+                           
+                            {%endif%}
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                        <h4 class="text-primary text-uppercase mb-4">Newsletter</h4>
+                        <p>Want us no notify you about any upcoming meetup?</p>
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control border-white p-3" placeholder="Your Email">
+                                <button class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid text-secondary py-4" style="background: #111111;">
+    <div class="container text-center">
+        <p class="mb-0">&copy; <a class="text-white border-bottom" href="#">Meet-up Zone 2023</a>. All Rights Reserved. Designed by <a class="text-white border-bottom" href="#">B-Daniel</a></p>
+    </div>
+</div>
+{%endblock%}
+<a href="{% url 'homepage' %}">Home</a>
+<h3> Login </h3>
+
+<form action="" method="POST">
+
+    {%csrf_token%}
+    <p><input type="email" name="email" placeholder="enter email"/></p>
+    <p><input type="password" name="password" placeholder="enter password"/></p>
+    <button type="submit">Login</button>
+
+</form>
+
+<p>You don't have an account? <a href="{% url 'registration' %}">Register</a></p>

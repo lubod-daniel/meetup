@@ -1,0 +1,9 @@
+<p> Are you sure you want to delete {{meetup}}</p>
+
+<form method="POST" action="">
+    {% csrf_token%}
+
+    <button type="submit"> Delete</button>
+
+    <a href="{% url 'homepage'%}">Back</a>
+</form>

@@ -1,0 +1,190 @@
+{% extends 'meetup/mainpage.html' %}
+{%load static%}
+
+{%block topbar%}
+<div class="container-fluid px-0 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-lg-4 text-center bg-secondary py-3">
+            <div class="d-inline-flex align-items-center justify-content-center">
+                {%if request.user.is_authenticated%}
+                <i class="bi bi-envelope fs-1 text-primary me-3"></i>
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1">welcome {{request.user.name}}!,</h6>
+                    <span>we hope we meet your satisfaction today.</span>
+                </div>
+                {%else%}
+                <i class="bi bi-envelope fs-1 text-primary me-3"></i>
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1">welcome here,</h6>
+                    <span>Explore to see more.</span>
+                </div>
+                {%endif%}
+            </div>
+        </div>
+        <div class="col-lg-4 text-center bg-primary border-inner py-1">
+            <div class="d-inline-flex align-items-center justify-content-center">
+                <a href="homepage.html" class="navbar-brand">
+                    <h1 class="m-0 text-uppercase text-white"><i class="fa-brands fa-meetup p-3"></i>MEET-UP ZONE</h1>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 text-center bg-secondary py-3">
+            <div class="d-inline-flex align-items-center justify-content-center">
+                <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1">Call Us</h6>
+                    <span>+234 706 957 2763</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block navbar%}
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+    <div class="container-fluid collapse navbar-collapse" id="navbarCollapse">
+        <a class="navbar-brand" href="{% url 'homepage' %}">
+            <img src="{% static 'meetup/images/meet_simple.jpg'%}" alt="Logo" width="40" height="30" class="d-inline-block align-text-top">
+            Meet-up Zone
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form action="" method="GET" class="d-flex" role="search" style="padding-left:100px">
+            {%csrf_token%}
+            <input type='search' placeholder='search meetup' name='search' class="form-control me-2" />
+            <button type='submit' class="btn btn-outline-light">search</button>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-left:150px">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item" style="padding-left:100px">
+                <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+            {%if request.user.is_authenticated%}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user-meetups' request.user.id%}">My Meet-up</a>
+            </li>
+            {%else%}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'registration' %}">Sign up</a>
+            </li>
+            {%endif%}
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+            </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+{%endblock%}
+
+{%block hero%}
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h1 class="font-secondary text-primary mb-4">The world is in your Palm</h1>
+                <h1 class="display-1 text-uppercase text-white mb-4">Meet-up Zone</h1>
+                <h1 class="text-uppercase text-white">Coolest place to blend with people</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block about%}
+{%endblock%}
+
+{%block facts%}
+<div class="container-fluid bg-img py-5 mb-5">
+    <div class="container py-5">
+        <div class="row gx-5 gy-4">
+            <div class="col-md-6" style="padding-left:300px">
+                <div class="d-flex">
+                    <div class="bg-primary border-inner d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa fa-star text-white"></i>
+                    </div>
+                    <div class="ps-4">
+                        <h6 class="text-primary text-uppercase">Meet-up</h6>
+                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">{{count}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="padding-left:100px">
+                <div class="d-flex">
+                    <div class="bg-primary border-inner d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                        <i class="fa fa-users text-white"></i>
+                    </div>
+                    <div class="ps-4">
+                        <h6 class="text-primary text-uppercase">Happy Users</h6>
+                        <h1 class="display-5 text-white mb-0" data-toggle="counter-up">{{count}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block products%}
+<div class="container-fluid about py-5">
+    <div class="container">
+        <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+            <h1 class="text-primary font-secondary">ALL MEET-UPS</h1>
+            <h1 class="display-4 ">Want to meet with people and learn new things?</h1>
+        </div>
+        <div class="tab-class text-center">
+            <ul class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase border-inner p-4 mb-5">
+                <li class="nav-item">
+                    <a class="nav-link text-white active" data-bs-toggle="pill" href="#tab-1">Join any Upcoming Event here</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+           
+                    <div class="row ">
+                        {%for meetup in meetups%}
+                        <div class="col-sm-6  p-3">
+                            <div class="d-flex h-100" style="width:100%">
+                                <div class="flex-shrink-0">
+                                    <img class="img-fluid" src="{{ meetup.image.url}}" alt="{{meetup.title}}" style="width: 200px; height: 100px;">
+                                    <h4 class="bg-dark text-primary p-2 m-0"><a href="{% url 'meetup-details' meetup.slug%}" target="_new">View</a></h4>
+                                </div>
+                                <div style="width:100%" class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
+                                    <h5 class="text-uppercase">{{meetup.title}}</h5>
+                                    <span>{{meetup.description | truncatewords:6}}</span>
+                                    <span>{{meetup.meetup_date}}</span> 
+                                    <span>{{meetup.meetup_time}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block service%}
+{%endblock%}
+
+{%block team%}
+{%endblock%}
+
+{%block offer%}
+{%endblock%}
+
+{%block testimonial%}
+{%endblock%}
