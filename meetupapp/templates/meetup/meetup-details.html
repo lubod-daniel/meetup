@@ -1,3 +1,342 @@
+{% extends 'meetup/about.html' %}
+{%load static%}
+
+{%block topbar%}
+{%endblock%}
+
+{%block navbar%}
+{%endblock%}
+
+{%block pageheader%}
+<div class="container-fluid bg-dark bg-img p-5 mb-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="display-4 text-uppercase text-white">MEET-UP details</h1>
+            <a href="{% url 'homepage' %}">Home</a>
+            <i class="far fa-square text-primary px-2"></i>
+            <a href="{% url 'meetup_create' %}">Add Meet-up</a>
+            <i class="far fa-square text-primary px-2"></i>
+            <a href="#">Add Speaker</a>
+            <i class="far fa-square text-primary px-2"></i>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block about%} 
+{%endblock%}
+
+{%block facts%}
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bree+Serif&family=EB+Garamond:ital,wght@0,500;1,800&display=swap');
+
+
+            body {
+            background: #DFC2F2;
+                background-image: linear-gradient( to right, #ffffb3,#ffe6e6);
+                background-attachment: fixed;	
+                background-size: cover;
+            
+                }
+
+            #container{
+                box-shadow: 0 15px 30px 1px grey;
+                background: rgba(255, 255, 255, 0.90);
+                text-align: center;
+                border-radius: 5px;
+                overflow: hidden;
+                margin: 5em auto;
+                height: 500px;
+                width: 900px;
+            
+                
+            }
+
+
+
+            .product-details {
+                position: relative;
+                text-align: left;
+                overflow: hidden;
+                padding: 30px;
+                height: 200%;
+                float: left;
+                width: 40%;
+
+            }
+
+            #container .product-details h1{
+                font-family: 'Bebas Neue', cursive;
+                display: inline-block;
+                position: relative;
+                font-size: 30px;
+                color: #344055;
+                margin: 0;
+                
+            }
+
+            #container .product-details h1:before{
+                position: absolute;
+                content: '';
+                right: 0%; 
+                top: 0%;
+                transform: translate(25px, -15px);
+                font-family: 'Bree Serif', serif;
+                display: inline-block;
+                background: #ffe6e6;
+                border-radius: 5px;
+                font-size: 14px;
+                padding: 5px;
+                color: white;
+                margin: 0;
+                animation: chan-sh 6s ease infinite;
+
+            }
+
+
+
+                
+
+
+            .hint-star {
+                display: inline-block;
+                margin-left: 0.5em;
+                color: gold;
+                width: 50%;
+            }
+
+
+            #container .product-details > p {
+            font-family: 'EB Garamond', serif;
+                text-align: center;
+                font-size: 18px;
+                color: #7d7d7d;
+                
+            }
+            .control{
+                position: absolute;
+                bottom: 20%;
+                left: 22.8%;
+                
+            }
+            .btn {
+
+                transform: translateY(0px);
+                transition: 0.3s linear;
+                background:  #809fff;
+                border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+                cursor: pointer;
+                outline: none;
+                border: none;
+                color: #eee;
+                padding: 0;
+                margin: 0;
+                
+            }
+
+            .btn:hover{transform: translateY(-6px);
+                background: #1a66ff;}
+
+            .btn span {
+                font-family: 'Farsan', cursive;
+                transition: transform 0.3s;
+                display: inline-block;
+            padding: 10px 20px;
+                font-size: 1.2em;
+                margin:0;
+                
+            }
+            .btn .price, .shopping-cart{
+                background: #333;
+                border: 0;
+                margin: 0;
+            }
+
+            .btn .price {
+                transform: translateX(-10%); padding-right: 15px;
+            }
+
+            .btn .shopping-cart {
+                transform: translateX(-100%);
+            position: absolute;
+                background: #333;
+                z-index: 1;
+            left: 0;
+            top: 0;
+            }
+
+            .btn .buy {z-index: 3; font-weight: bolder;}
+
+            .btn:hover .price {transform: translateX(-110%);}
+
+            .btn:hover .shopping-cart {transform: translateX(0%);}
+
+
+
+            .product-image {
+                transition: all 0.3s ease-out;
+                display: inline-block;
+                position: relative;
+                overflow: hidden;
+                height: 100%;
+                float: right;
+                width: 45%;
+                display: inline-block;
+            }
+
+            #container img {width: 100%;height: 100%;}
+
+            .info {
+                background: rgba(27, 26, 26, 0.9);
+                font-family: 'Bree Serif', serif;
+                transition: all 0.3s ease-out;
+                transform: translateX(-100%);
+                position: absolute;
+                line-height: 1.8;
+                text-align: left;
+                font-size: 105%;
+                cursor: no-drop;
+                color: #FFF;
+                height: 100%;
+                width: 100%;
+                left: 0;
+                top: 0;
+            }
+
+            .info h2 {text-align: center}
+            .product-image:hover .info{transform: translateX(0);}
+
+            .info ul li{transition: 0.3s ease;}
+            .info ul li:hover{transform: translateX(50px) scale(1.3);}
+
+            .product-image:hover img {transition: all 0.3s ease-out;}
+            .product-image:hover img {transform: scale(1.2, 1.2);} 
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+        <div id="container">     
+            <div class="product-details">
+                <h1>{{meetup.title}}</h1>
+                <span class="hint-star star">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </span>
+                <p class="information">
+                    {{meetup.description}}
+                </p>
+               <div class="control mt-5">
+                    <!--<button class="btn">
+                        <span class="price">$250</span>
+                        <span class="shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                        <span class="buy">Get now</span>
+                    </button>-->
+                </div>
+            </div>
+            
+            <div class="product-image">
+                <img src="{{ meetup.image.url}}" alt="{{meetup.title}}" height="400" width="400" / >
+                
+                <div class="info">
+                    <h2>Edits and Adjustments</h2>
+                    <ul>
+                        <li><strong><a href="#">Edit Meet-up </a></strong></li>
+                        <li><strong><a href="#">Delete Meet-up</a></strong></li>
+                        <li><strong><a href="#">Create New Meet-up</a></strong></li>
+                        <li><strong><a href="{% url 'add-speakers' meetup.id%}">Add Speaker</a></strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+{%endblock%}
+
+{%block footer%}
+<div class="container-fluid bg-img text-secondary" style="margin-top: 90px">
+    <div class="container">
+        <div class="row justify-content-center">
+           
+            <div class="col-lg-8 col-md-6">
+                <div class="row gx-5">
+                    <div class="col-lg-4 col-md-12 pt-5 mb-5">
+                        <h4 class="text-primary text-uppercase mb-4">Get In Touch</h4>
+                        <div class="d-flex mb-2">
+                            <i class="bi bi-geo-alt text-primary me-2"></i>
+                            <p class="mb-0">News Engineering, Abuja.</p>
+                        </div>
+                        <div class="d-flex mb-2">
+                            <i class="bi bi-envelope-open text-primary me-2"></i>
+                            <p class="mb-0">lubod-daniel@outlooks.com</p>
+                        </div>
+                        <div class="d-flex mb-2">
+                            <i class="bi bi-telephone text-primary me-2"></i>
+                            <p class="mb-0">+234 706 957 2763</p>
+                        </div>
+                        <div class="d-flex mt-4">
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://twitter.com/home" target="_blank"><i class="fab fa-twitter fw-normal"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://web.facebook.com/" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://www.linkedin.com/in/olubode-busayo-aca-in-view-33440717a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BGu4UoZ3dSxqtHCgjebXvnw%3D%3D" target="_blank"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                            <a class="btn btn-lg btn-primary btn-lg-square border-inner rounded-0 me-2" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fw-normal"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                        <h4 class="text-primary text-uppercase mb-4">Quick Links</h4>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="{% url 'homepage' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                            <a class="text-secondary mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                            {%if request.user.is_authenticated%}
+                            <a class="text-secondary mb-2" href="{% url 'logout' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Logout</a>
+                            <a class="text-secondary mb-2" href="{% url 'meetup_create'%}"><i class="bi bi-arrow-right text-primary me-2"></i>Create Meet up</a>
+                            <a class="text-secondary mb-2" href="{% url 'user-meetups' request.user.id%}"><i class="bi bi-arrow-right text-primary me-2"></i>My Meet up</a>
+                            {%else%}
+                            <a class="text-secondary mb-2" href="{% url 'login' %}"><i class="bi bi-arrow-right text-primary me-2"></i>Login</a>
+                           
+                            {%endif%}
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5">
+                        <h4 class="text-primary text-uppercase mb-4">Newsletter</h4>
+                        <p>Want us no notify you about any upcoming meetup?</p>
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control border-white p-3" placeholder="Your Email">
+                                <button class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid text-secondary py-4" style="background: #111111;">
+    <div class="container text-center">
+        <p class="mb-0">&copy; <a class="text-white border-bottom" href="#">Meet-up Zone 2023</a>. All Rights Reserved. Designed by <a class="text-white border-bottom" href="#">B-Daniel</a></p>
+    </div>
+</div>
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
 {%load static%}
 <h1>Meetup details</h1>
 
