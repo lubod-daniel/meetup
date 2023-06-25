@@ -83,6 +83,22 @@ class participantform(forms.ModelForm):
     class Meta:
         model=Participant
         fields=['name', 'email']
+        widgets = {
+            'name' : TextInput(
+            attrs={
+                    
+                     "class":"form-control"
+                }
+            
+            ),
+            'email' : TextInput(
+            attrs={
+                    
+                     "class":"form-control"
+                }
+            
+            ),
+        }   
         
 class speakerform(forms.ModelForm):
     class Meta:

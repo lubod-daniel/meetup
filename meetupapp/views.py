@@ -25,7 +25,7 @@ def homepage(request):
     
     
     count=meetups.count
-    return render(request, 'meetup/homepage.html', {'meetups': meetups, 'count': count })
+    return render(request, 'meetup/homepage.html', {'meetups': meetups, 'count': count,})
 
 def meetup_details(request, meetup_slug):
     
@@ -48,7 +48,7 @@ def meetup_details(request, meetup_slug):
  
         
 def confirm_registration(request):
-    return render(request, 'meetup/registartion-success.html')
+    return render(request, 'meetup/registration-success.html')
 
 
 class UpdateMeetup(LoginRequiredMixin, UpdateView):

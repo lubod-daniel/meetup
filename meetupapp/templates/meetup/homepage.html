@@ -158,7 +158,7 @@
                             <div class="d-flex h-100" style="width:100%">
                                 <div class="flex-shrink-0">
                                     <img class="img-fluid" src="{{ meetup.image.url}}" alt="{{meetup.title}}" style="width: 200px; height: 100px;">
-                                    <h4 class="bg-dark text-primary p-2 m-0"><a href="{% url 'meetup-details' meetup.slug%}" target="_new">View</a></h4>
+                                    <a href="{% url 'meetup-details' meetup.slug%}" target="_new"><h4 class="bg-dark text-primary p-2 m-0">View</h4></a>
                                 </div>
                                 <div style="width:100%" class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
                                     <h5 class="text-uppercase">{{meetup.title}}</h5>
